@@ -9,7 +9,7 @@ export default function Home() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <Image
-                src="/neuroflow-logo.svg"
+                src="/neuroflow-logo-transparent.svg"
                 alt="Neuroflow Logo"
                 width={150}
                 height={45}
@@ -36,11 +36,6 @@ export default function Home() {
       <section id="home" className="pt-16 min-h-screen flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-black to-blue-800/20"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="mb-8">
-            <span className="inline-block bg-blue-600/20 text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              BETA - Assistente de IA + Desktop
-            </span>
-          </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent">
             Neuroflow Desktop
@@ -54,10 +49,6 @@ export default function Home() {
             <button className="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 px-8 py-4 rounded-full text-white font-medium text-lg transition-all duration-300 transform hover:scale-105">
               Começar Agora
             </button>
-            <p className="text-gray-400">
-              <span className="font-semibold">R$50</span> por usuário, cobrado mensalmente 
-              <a href="#" className="text-blue-400 hover:text-blue-300 ml-1">(Saiba mais)</a>
-            </p>
           </div>
 
           {/* Key Features Grid */}
@@ -226,27 +217,6 @@ export default function Home() {
                 Nossa equipe de especialistas está disponível 24/7 para ajudar você. Oferecemos suporte personalizado 
                 e treinamento completo para maximizar seu potencial.
               </p>
-            </div>
-          </div>
-
-          <div className="mt-16 bg-gradient-to-r from-blue-900/30 to-blue-800/30 rounded-2xl p-8 backdrop-blur-sm border border-blue-900/30">
-            <div className="grid md:grid-cols-4 gap-8 text-center">
-              <div>
-                <div className="text-4xl font-bold text-blue-400 mb-2">99.9%</div>
-                <div className="text-gray-300">Precisão da IA</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-blue-400 mb-2">&lt; 100ms</div>
-                <div className="text-gray-300">Tempo de Resposta</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-blue-400 mb-2">50+</div>
-                <div className="text-gray-300">Idiomas Suportados</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-blue-400 mb-2">1M+</div>
-                <div className="text-gray-300">Tarefas Processadas</div>
-              </div>
             </div>
           </div>
         </div>
@@ -485,7 +455,7 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8">
             <div className="col-span-2">
               <Image
-                src="/neuroflow-logo.svg"
+                src="/neuroflow-logo-transparent.svg"
                 alt="Neuroflow Logo"
                 width={150}
                 height={45}
