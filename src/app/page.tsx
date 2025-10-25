@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+
 export default function Home() {
   return (
     <div className="min-h-screen text-white" style={{backgroundColor: 'var(--background)'}}>
@@ -421,51 +422,65 @@ export default function Home() {
             {/* Formulário centralizado */}
             <div className="w-full max-w-lg backdrop-blur-sm border rounded-xl p-8" style={{backgroundColor: 'var(--card-bg)', borderColor: 'var(--border-color)'}}>
               <h3 className="text-2xl font-bold text-white mb-6 text-center">Fale com a Neuroflow</h3>
-              <div className="space-y-6">
+               <div className="space-y-6">
                 <a
-                  href="#"
-                  className="w-full inline-flex items-center justify-center bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 px-8 py-4 rounded-lg text-white font-medium transition-all duration-300 transform hover:scale-105"
-                  aria-label="Abrir conversa no WhatsApp"
+                  href="https://api.whatsapp.com/send?phone=5517991308002&text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20a%20Neuroflow."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-10 mx-auto block w-fit bg-green-500 hover:bg-green-600 text-white py-3 px-4 rounded-lg transition duration-300"
                 >
-                  WhatsApp
+                  Fale via WhatsApp
                 </a>
-                <p className="text-gray-400 text-sm text-center">Em breve adicionaremos o número do WhatsApp aqui.</p>
+                <p className="text-gray-300 mt-6">
+                  
+                </p>
 
-                {/* Formulário de contato (envio por email futuramente) */}
-                <form className="space-y-6" action="mailto:contato@neuroflow.ai" method="post" encType="text/plain">
+                {/* Formulário de contato (envio por email via API) */}
+                <form
+                  action="/api/contact"
+                  method="post"
+                  className="space-y-4"
+                >
+                  <input type="hidden" name="redirect" value="/?contact=success#contact" />
                   <div>
-                    <label className="block text-gray-300 text-sm font-medium mb-2">Nome</label>
+                    <label htmlFor="name" className="block text-gray-200 mb-2">
+                      Seu nome
+                    </label>
                     <input
                       type="text"
-                      style={{backgroundColor: 'var(--card-bg)', borderColor: 'var(--border-color)'}}
-                      className="w-full px-4 py-3 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                      placeholder="Seu nome"
-                      name="Nome"
+                      id="name"
+                      name="name"
+                      required
+                      className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gray-600"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-300 text-sm font-medium mb-2">E-mail</label>
+                    <label htmlFor="email" className="block text-gray-200 mb-2">
+                      Seu email
+                    </label>
                     <input
                       type="email"
-                      style={{backgroundColor: 'var(--card-bg)', borderColor: 'var(--border-color)'}}
-                      className="w-full px-4 py-3 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                      placeholder="seu@email.com"
-                      name="Email"
+                      id="email"
+                      name="email"
+                      required
+                      className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gray-600"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-300 text-sm font-medium mb-2">Mensagem</label>
+                    <label htmlFor="message" className="block text-gray-200 mb-2">
+                      Sua mensagem
+                    </label>
                     <textarea
+                      id="message"
+                      name="message"
                       rows={5}
-                      style={{backgroundColor: 'var(--card-bg)', borderColor: 'var(--border-color)'}}
-                      className="w-full px-4 py-3 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                      placeholder="Como podemos ajudar você?"
-                      name="Mensagem"
+                      required
+                      className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gray-600"
                     ></textarea>
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 px-8 py-4 rounded-lg text-white font-medium transition-all duration-300 transform hover:scale-105"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg transition duration-300"
                   >
                     Enviar Mensagem
                   </button>
@@ -530,8 +545,10 @@ export default function Home() {
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400">
               © 2025 Neuroflow. Todos os direitos reservados. 
-              <a href="#" className="text-blue-400 hover:text-blue-300 ml-2">Política de Privacidade</a> | 
-              <a href="#" className="text-blue-400 hover:text-blue-300 ml-2">Termos de Uso</a>
+              <a href="/politica-de-privacidade" className="text-blue-400 hover:text-blue-300 ml-2">Política de Privacidade</a> | 
+              <a href="/termos-de-uso" className="text-blue-400 hover:text-blue-300 ml-2">Termos de Uso</a> | 
+              <a href="/dpo" className="text-blue-400 hover:text-blue-300 ml-2">Contato do DPO</a> | 
+              <a href="/dpo#form" className="text-blue-400 hover:text-blue-300 ml-2 underline">Gerenciar cookies</a>
             </p>
           </div>
         </div>
