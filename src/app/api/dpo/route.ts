@@ -7,64 +7,41 @@ function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
   try {
-    const raw = await req.text();
-    const params = new URLSearchParams(raw);
+    const formData = await request.formData();
+    const name = formData.get("name")?.toString() || "";
+    const email = formData.get("email")?.toString() || "";
+    const subject = formData.get("subject")?.toString() || "";
+    const message = formData.get("message")?.toString() || "";
 
-    const type = (params.get("type") || "").trim();
-    const name = (params.get("name") || "").trim();
-    const email = (params.get("email") || "").trim();
-    const message = (params.get("message") || "").trim();
-    const redirect = params.get("redirect") || "/dpo?success=1#form";
-
-    if (!type || !name || !email || !message) {
-      return NextResponse.json({ error: "Campos obrigatórios ausentes." }, { status: 400 });
-    }
-
-    if (!isValidEmail(email)) {
-      return NextResponse.json({ error: "Email inválido." }, { status: 400 });
-    }
-
-    const host = process.env.SMTP_HOST;
-    const port = Number(process.env.SMTP_PORT || 465);
-    const user = process.env.SMTP_USER;
-    const pass = process.env.SMTP_PASS;
-
-    if (!host || !port || !user || !pass) {
-      return NextResponse.json({ error: "Configuração SMTP ausente. Verifique .env.local." }, { status: 500 });
+    if (!name || !email || !message) {
+      return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
 
     const transporter = nodemailer.createTransport({
-      host,
-      port,
-      secure: port === 465,
-      auth: { user, pass },
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT || 587),
+      secure: false,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
     });
 
-    const mailTo = process.env.MAIL_DPO_TO || process.env.MAIL_TO || user;
-    const mailFrom = process.env.MAIL_FROM || user;
-    const subject = `LGPD - Solicitação do titular (${type})`;
+    const mailOptions: nodemailer.SendMailOptions = {
+      from: process.env.SMTP_FROM,
+      to: process.env.DPO_TO || process.env.SMTP_TO,
+      subject: subject || `Contato DPO - ${name}`,
+      text: `Nome: ${name}\nEmail: ${email}\nAssunto: ${subject}\nMensagem: ${message}`,
+    };
 
-    const info = await transporter.sendMail({
-      from: mailFrom,
-      to: mailTo,
-      subject,
-      replyTo: email,
-      text: `Tipo: ${type}\nNome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`,
-      html: `<p><strong>Tipo:</strong> ${type}</p>
-             <p><strong>Nome:</strong> ${name}</p>
-             <p><strong>Email:</strong> ${email}</p>
-             <p><strong>Mensagem:</strong></p>
-             <p>${message.replace(/\n/g, "<br>")}</p>`,
-    });
+    await transporter.sendMail(mailOptions);
 
-    console.log("Solicitação DPO enviada:", info.messageId);
-
-    const redirectUrl = new URL(redirect, req.url);
-    return NextResponse.redirect(redirectUrl, 303);
-  } catch (err: any) {
-    console.error("Erro ao enviar solicitação DPO:", err);
-    return NextResponse.json({ error: "Falha ao enviar solicitação." }, { status: 500 });
+    const redirect = formData.get("redirect")?.toString() || "/dpo?contact=success#form";
+    return NextResponse.redirect(redirect);
+  } catch (err: unknown) {
+    console.error("DPO POST error:", err);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

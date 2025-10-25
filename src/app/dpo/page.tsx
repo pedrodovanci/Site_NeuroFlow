@@ -1,11 +1,20 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
-export default function DPOPage() {
-  const [success, setSuccess] = useState(false);
+// Adiciona a tipagem do openCookieManager no objeto window
+declare global {
+  interface Window {
+    openCookieManager?: () => void;
+  }
+}
+
+function DPOContent() {
+  const searchParams = useSearchParams();
+  const success = searchParams.get("success") !== null;
+
   useEffect(() => {
-    const url = new URL(window.location.href);
-    if (url.searchParams.get("success") === "1") setSuccess(true);
+    // Nenhum efeito colateral adicional aqui
   }, []);
 
   return (
@@ -59,10 +68,20 @@ export default function DPOPage() {
 
           {/* Link para reabrir gerenciamento de cookies */}
           <div className="text-gray-300">
-            <button onClick={() => (window as any).openCookieManager?.()} className="text-blue-400 hover:underline">Gerenciar cookies</button>
+            <button onClick={() => window.openCookieManager?.()} className="mt-6 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">
+              Gerenciar cookies
+            </button>
           </div>
         </section>
       </div>
     </main>
+  );
+}
+
+export default function DPOPage() {
+  return (
+    <Suspense fallback={null}>
+      <DPOContent />
+    </Suspense>
   );
 }

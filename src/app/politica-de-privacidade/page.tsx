@@ -45,7 +45,7 @@ export default function PoliticaDePrivacidade() {
 
           <h2 className="text-2xl font-semibold text-white mt-6">7. Cookies e Preferências</h2>
           <p>
-            Utilizamos um banner de consentimento para que você possa gerenciar suas preferências de cookies (funcionais, análise e marketing). Você pode revisitar suas escolhas em qualquer momento clicando em "Gerenciar cookies" no rodapé.
+            Utilizamos um banner de consentimento para que você possa gerenciar suas preferências de cookies (funcionais, análise e marketing). Você pode revisitar suas escolhas em qualquer momento clicando em <a href="/dpo#form" className="text-blue-400 hover:text-blue-300 underline">&quot;Gerenciar cookies&quot;</a> no rodapé.
           </p>
 
           <h2 className="text-2xl font-semibold text-white mt-6">8. Contato do DPO</h2>

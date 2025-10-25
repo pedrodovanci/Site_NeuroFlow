@@ -63,8 +63,9 @@ export async function POST(req: Request) {
     // Redireciona para a página com indicador de sucesso
     const redirectUrl = new URL(redirect, req.url);
     return NextResponse.redirect(redirectUrl, 303);
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("Erro ao enviar email:", err);
     return NextResponse.json({ error: "Falha ao enviar email." }, { status: 500 });
   }
 }
+

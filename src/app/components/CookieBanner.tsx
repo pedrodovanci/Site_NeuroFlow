@@ -1,6 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 
+// Tipagem global para a função de abrir o gerenciador de cookies
+declare global {
+  interface Window {
+    openCookieManager?: () => void;
+  }
+}
+
 // Tipos de consentimento. "necessary" é sempre habilitado e não pode ser desativado.
 const defaultPreferences = {
   necessary: true,
@@ -47,7 +54,7 @@ export default function CookieBanner() {
     }
 
     // Expor função global simples para reabrir gerenciamento pela página
-    (window as any).openCookieManager = () => {
+    window.openCookieManager = () => {
       setManaging(true);
       setOpen(true);
     };

@@ -474,8 +474,8 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-300 leading-relaxed">
-                "A Neuroflow revolucionou nossa empresa. A automação nos ajudou
-                em processos que antes levavam horas."
+                &quot;A Neuroflow revolucionou nossa empresa. A automação nos ajudou
+                em processos que antes levavam horas.&quot;
               </p>
             </div>
 
@@ -514,10 +514,10 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-300 leading-relaxed">
-                "Como desenvolvedor, fiquei impressionado com a qualidade das
-                ferramentas utilizadas pela Neuroflow. Aumentou nossa
-                produtividade em 300%."
-              </p>
+  &quot;Como desenvolvedor, fiquei impressionado com a qualidade das
+  ferramentas utilizadas pela Neuroflow. Aumentou nossa
+  produtividade em 300%.&quot;
+</p>
             </div>
 
             <div
@@ -553,9 +553,9 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-300 leading-relaxed">
-                "A interface é super intuitiva. Mesmo sem conhecimento técnico,
-                consegui implementar soluções complexas rapidamente."
-              </p>
+  &quot;A interface é super intuitiva. Mesmo sem conhecimento técnico,
+  consegui implementar soluções complexas rapidamente.&quot;
+</p>
             </div>
           </div>
         </div>
